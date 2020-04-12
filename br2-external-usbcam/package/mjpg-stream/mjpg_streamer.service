@@ -1,0 +1,11 @@
+[Unit]
+Description=mjpg-streamer
+BindsTo=dev-video0.device
+After=dev-video0.device
+After=syslog.target network.target
+
+[Service]
+ExecStart=/usr/bin/mjpg_streamer -i "/usr/lib/mjpg-streamer/input_uvc.so -yuv" -o "/usr/lib/mjpg-streamer/output_http.so -p 8080 -w /var/www"
+
+[Install]
+WantedBy=multi-user.target
