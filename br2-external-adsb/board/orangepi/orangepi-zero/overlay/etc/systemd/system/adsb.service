@@ -1,0 +1,9 @@
+[Unit]
+Description=ADS-B
+After=syslog.target network.target
+
+[Service]
+ExecStart=/bin/dump1090 --net --fix --aggressive --metric
+KillMode=process
+KillSignal=SIGKILL
+
