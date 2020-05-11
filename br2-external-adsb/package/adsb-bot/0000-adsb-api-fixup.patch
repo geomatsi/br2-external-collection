@@ -1,0 +1,32 @@
+diff --git a/adsbtable/adsbtable.go b/adsbtable/adsbtable.go
+index d29c350..2bdc971 100644
+--- a/adsbtable/adsbtable.go
++++ b/adsbtable/adsbtable.go
+@@ -163,7 +163,7 @@ func (tb *AdsbTable) getString(id adsb.IcaoId) string {
+ 		return ""
+ 	}
+ 
+-	if m.HasCallsign() {
++	if m.Callsign != "" {
+ 		s = fmt.Sprintf("%s (%s)", m.Callsign, m.Icao24)
+ 	} else {
+ 		s = fmt.Sprintf("UNKNOWN (%s)", m.Icao24)
+@@ -173,15 +173,15 @@ func (tb *AdsbTable) getString(id adsb.IcaoId) string {
+ 		s += fmt.Sprintf(" ALT [%d]", m.Altitude)
+ 	}
+ 
+-	if m.HasGroundSpeed() {
++	if m.GroundSpeed != 0 {
+ 		s += fmt.Sprintf(" GND SPEED [%d]", m.GroundSpeed)
+ 	}
+ 
+-	if m.HasVerticalRate() {
++	if m.VerticalRate != 0 {
+ 		s += fmt.Sprintf(" VERT SPEED [%d]", m.VerticalRate)
+ 	}
+ 
+-	if m.HasPosition() {
++	if !m.Position.IsNil() {
+ 		s += fmt.Sprintf(" POS [%s]", m.Position)
+ 	}
+ 

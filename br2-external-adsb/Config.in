@@ -1,1 +1,1 @@
-#source "$BR2_EXTERNAL_ADSB_PATH/package/fun/Config.in"
+source "$BR2_EXTERNAL_ADSB_PATH/package/adsb-bot/Config.in"

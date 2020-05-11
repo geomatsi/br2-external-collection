@@ -1,0 +1,9 @@
+[Unit]
+Description=ADS-B Telegram bot
+After=syslog.target network.target
+
+[Service]
+ExecStart=/usr/bin/adsb-bot -c /etc/adsb/adsb_bot.conf
+
+[Install]
+WantedBy=multi-user.target
