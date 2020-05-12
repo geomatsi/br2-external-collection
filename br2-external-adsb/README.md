@@ -31,6 +31,7 @@ Follow Buildroot instruction and write image to SDcard. Before booting device,
 mount SDcard and edit the following files:
 * `/etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf` to setup wireless access
 * `/etc/openvpn/client.conf` and `/etc/openvpn/pass` to setup VPN client and enable Telegram Bot
+* `/etc/adsb/adsb_bot.conf` to setup authentication token for Telegram Bot
 
 ## ADS-B
 
@@ -43,4 +44,6 @@ To view a ADS-B map provided by dump1090 service just point your web brower to t
 
 ### Telegram Bot
 
-TODO
+Telegram Bot supports the following simple commands:
+* \toggle - enable/disable ADS-B updates
+* \list - show current active ADS-B records
