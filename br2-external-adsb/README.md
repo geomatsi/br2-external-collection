@@ -1,5 +1,9 @@
 # Buildroot external layer: adsb
 
+## Overview
+
+Simple Buildroot external layer for ADS-B capture using _dump1090_ and _RTL-SDR dongle_ and simple remote access to captured data using Telegram bot.
+
 ## Get sources
 
 Get external layers:
@@ -47,3 +51,8 @@ To view a ADS-B map provided by dump1090 service just point your web brower to t
 Telegram Bot supports the following simple commands:
 * \toggle - enable/disable ADS-B updates
 * \list - show current active ADS-B records
+
+## Links
+* [SBS-1 base station protocol](http://woodair.net/sbs/article/barebones42_socket_data.htm)
+* [dump1090: ADS-B decoder designed for RTL SDR devices](https://github.com/MalcolmRobb/dump1090)
+* [Go package for parsing ADS-B messages from SBS-1 protocol](https://pkg.go.dev/github.com/skypies/adsb)
