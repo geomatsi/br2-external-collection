@@ -2,6 +2,7 @@
 BR2_arm=y
 BR2_arm1176jzf_s=y
 BR2_ARM_EABIHF=y
+BR2_GLOBAL_PATCH_DIR="$(BR2_EXTERNAL_CONNECT_PATH)/board/raspberrypi0w/patches"
 BR2_TARGET_GENERIC_ROOT_PASSWD="root"
 BR2_TARGET_GENERIC_HOSTNAME="connect"
 BR2_TARGET_GENERIC_ISSUE="Welcome to Buildroot for the rpi0_w"
