@@ -7,7 +7,7 @@ Tethering=false
 
 [Gadget]
 Enable=true
-Tethering=false
+Tethering=true
 
 [WiFi]
 Enable=true
