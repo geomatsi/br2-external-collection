@@ -43,9 +43,8 @@ BR2_TARGET_ROOTFS_EXT2_4=y
 BR2_TARGET_ROOTFS_EXT2_SIZE="256M"
 
 # image scripts
-BR2_ROOTFS_POST_BUILD_SCRIPT="board/raspberrypi0w/post-build.sh"
+BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL_CONNECT_PATH)/board/raspberrypi0w/post-build.sh"
 BR2_ROOTFS_POST_IMAGE_SCRIPT="board/raspberrypi0w/post-image.sh"
-BR2_ROOTFS_POST_SCRIPT_ARGS="--add-miniuart-bt-overlay"
 BR2_ROOTFS_OVERLAY="$(BR2_EXTERNAL_CONNECT_PATH)/board/raspberrypi0w/overlay/"
 
 # rpi0-w firmwares
