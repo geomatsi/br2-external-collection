@@ -15,7 +15,7 @@ Get Buildroot release branch:
 ```bash
 $ git clone git://git.buildroot.net/buildroot buildroot-release
 $ cd buildroot-release
-$ git checkout -b v2020.02.1 2020.02.1
+$ git checkout -b v2020.02.3 2020.02.3
 ```
 
 ## Select configuration
@@ -25,9 +25,14 @@ Connman experiments with switching between Ethernet and WiFi on  Orange Pi Zero 
 $ make BR2_EXTERNAL=/path/to/br2-external-connect connect_orangepi_zero_defconfig
 ```
 
-Connman experiments with WiFi and USB gadget tethering on  Orange Pi Zero board:
+Connman experiments with WiFi and USB gadget tethering on  Raspberry Pi Zero W board:
 ```bash
-$ make BR2_EXTERNAL=/path/to/br2-external-connect connect_orangepi_zero_defconfig
+$ make BR2_EXTERNAL=/path/to/br2-external-connect connect_rpi0w_gadget_defconfig
+```
+
+Bluetooth experiments on  Raspberry Pi Zero W board:
+```bash
+$ make BR2_EXTERNAL=/path/to/br2-external-connect connect_rpi0w_bluetooth_defconfig
 ```
 
 ## Build and flash image
@@ -49,11 +54,27 @@ For Raspberry Zero W board:
 Note that for Raspberry Zero W this step is particularly important since selected DTS overlay
 enables USB gadget but disables UART port.
 
-## TODO: Bluetooth
+## TODO
 
-Next step is to split Bluetooth experiments into a separate configuration file.
-For now this is a collection of commands on both rpi0-w and host to establish
-rfcomm serial access to rpi0-w board over bluetooth.
+### Gadget tethering
+
+For some reason gadget is not enabled by default on connman startup. So gadget technology
+in connman has to be enabled first. This can be done using the following command:
+
+```bash
+$ connmanctl enable gadget
+```
+
+Obviously there should be some configuration switch to enable gadget by default.
+However so far I have not yet figured out which one. As a result, gadget image
+is not yet completely autonomous at the moment.
+
+### Bluetooth
+
+Bluetooth is not yet wrapped into proper autonomous sequence of systemd unit
+files and connman/bluez configuration files. For now this is a collection
+of commands on both rpi0-w and host to establish rfcomm serial access
+to rpi0-w board over bluetooth.
 
 * Enable bluetooth on rpi0-w and setup rfcomm:
 ```bash
