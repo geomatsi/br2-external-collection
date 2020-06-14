@@ -1,0 +1,1 @@
+#source "$BR2_EXTERNAL_BT_PATH/package/test/Config.in"

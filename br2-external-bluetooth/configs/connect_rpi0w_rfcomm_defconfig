@@ -2,7 +2,7 @@
 BR2_arm=y
 BR2_arm1176jzf_s=y
 BR2_ARM_EABIHF=y
-BR2_GLOBAL_PATCH_DIR="$(BR2_EXTERNAL_CONNECT_PATH)/board/raspberrypi0w/patches"
+BR2_GLOBAL_PATCH_DIR="$(BR2_EXTERNAL_BT_PATH)/board/raspberrypi0w/patches"
 BR2_TARGET_GENERIC_ROOT_PASSWD="root"
 BR2_TARGET_GENERIC_HOSTNAME="connect"
 BR2_TARGET_GENERIC_ISSUE="Welcome to Buildroot for the rpi0_w"
@@ -29,7 +29,7 @@ BR2_LINUX_KERNEL_CUSTOM_TARBALL_LOCATION="$(call github,raspberrypi,linux,4f2a4c
 BR2_LINUX_KERNEL_DEFCONFIG="bcmrpi"
 BR2_LINUX_KERNEL_DTS_SUPPORT=y
 BR2_LINUX_KERNEL_INTREE_DTS_NAME="bcm2708-rpi-zero-w"
-BR2_LINUX_KERNEL_CONFIG_FRAGMENT_FILES="$(BR2_EXTERNAL_CONNECT_PATH)/board/raspberrypi0w/linux-extras.config"
+BR2_LINUX_KERNEL_CONFIG_FRAGMENT_FILES="$(BR2_EXTERNAL_BT_PATH)/board/raspberrypi0w/linux-extras.config"
 BR2_LINUX_KERNEL_NEEDS_HOST_OPENSSL=y
 
 # host packages
@@ -43,9 +43,9 @@ BR2_TARGET_ROOTFS_EXT2_4=y
 BR2_TARGET_ROOTFS_EXT2_SIZE="512M"
 
 # image scripts
-BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL_CONNECT_PATH)/board/raspberrypi0w/post-build.sh"
+BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL_BT_PATH)/board/raspberrypi0w/post-build.sh"
 BR2_ROOTFS_POST_IMAGE_SCRIPT="board/raspberrypi0w/post-image.sh"
-BR2_ROOTFS_OVERLAY="$(BR2_EXTERNAL_CONNECT_PATH)/board/raspberrypi0w/overlay_bluetooth/"
+BR2_ROOTFS_OVERLAY="$(BR2_EXTERNAL_BT_PATH)/board/raspberrypi0w/overlay_bluetooth/"
 
 # rpi0-w firmwares
 BR2_PACKAGE_RPI_FIRMWARE=y

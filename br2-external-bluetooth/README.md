@@ -2,7 +2,7 @@
 
 ## Overview
 
-Simple Buildroot external layer for experimenting with Connman/oFono stack.
+Simple Buildroot external layer for experimenting with Bluetooth.
 
 ## Get sources
 
@@ -20,14 +20,9 @@ $ git checkout -b v2020.02.3 2020.02.3
 
 ## Select configuration
 
-Connman experiments with switching between Ethernet and WiFi on  Orange Pi Zero board:
+Bluetooth serial access to Raspberry Pi Zero W board:
 ```bash
-$ make BR2_EXTERNAL=/path/to/br2-external-connect connect_orangepi_zero_defconfig
-```
-
-Connman experiments with WiFi and USB gadget tethering on  Raspberry Pi Zero W board:
-```bash
-$ make BR2_EXTERNAL=/path/to/br2-external-connect connect_rpi0w_gadget_defconfig
+$ make BR2_EXTERNAL=/path/to/br2-external-bluetooth connect_rpi0w_rfcomm_defconfig
 ```
 
 ## Build and flash image
@@ -39,10 +34,6 @@ $ time make
 Follow Buildroot instructions and write image to SDcard. Before booting device,
 mount SDcard and edit several files to make sure that WiFi connects on boot.
 
-For Orange Pi Zero board:
-* `var/lib/connman/eth_test1.config` to configure static IPv4 config or DHCP for wired access
-* `var/lib/connman/wifi_test1.config` to configure AP name and password for wireless access
-
 For Raspberry Zero W board:
 * `var/lib/connman/wifi_test1.config` to configure AP name and password for wireless access
 
@@ -51,18 +42,35 @@ enables USB gadget but disables UART port.
 
 ## TODO
 
-### Gadget tethering
+### Bluetooth autostart
 
-For some reason gadget is not enabled by default on connman startup. So gadget technology
-in connman has to be enabled first. This can be done using the following command:
+Bluetooth is not yet wrapped into proper autonomous sequence of systemd unit
+files and connman/bluez configuration files. For now this is a collection
+of commands on both rpi0-w and host to establish rfcomm serial access
+to rpi0-w board over bluetooth.
 
+* Enable bluetooth on rpi0-w and setup rfcomm:
 ```bash
-$ connmanctl enable gadget
+$ hciattach /dev/ttyAMA0 bcm43xx 921600 flow
+$ rfkill unblock bluetooth
+$ rfcomm watch /dev/rfcomm0 1 /sbin/agetty rfcomm0 115200 linux
 ```
-
-Obviously there should be some configuration switch to enable gadget by default.
-However so far I have not yet figured out which one. As a result, gadget image
-is not yet completely autonomous at the moment.
+* Use bluetoothctl tool to bring-up controllers on both host and rpi0w:
+```bash
+$ bluetoothctl power on
+$ bluetoothctl discoverable on
+```
+* Use bluetoothctl tool on host to pair with rpi0w:
+```bash
+$ bluetoothctl scan on
+$ bluetoothctl pair <peer MAC>
+```
+Note that for now you will have confirm pin on both host and rpi0w
+* Setup rfcomm serial connection on host:
+```bash
+$ sudo rfcomm bind 0 <rpi0-w bt MAC address>
+$ sudo minicom -D /dev/rfcomm0
+```
 
 ## Links
 * [ConnMan API documentation](https://git.kernel.org/pub/scm/network/connman/connman.git/tree/doc)
