@@ -27,8 +27,12 @@ $ git checkout -b v2020.02.3 2020.02.3
 
 ### Overview
 
-External layer for ADS-B capture using _dump1090_ and _RTL-SDR dongle_ and simple remote access to captured data using Telegram bot. Supported board configurations:
+External layer for ADS-B capture using _dump1090_ and _RTL-SDR dongle_ and simple remote access to captured data using Telegram bot.
 
+Major purposes:
+* integration of Golang application into Buildroot
+
+Supported board configurations:
 * ADSB Bot on Orange Pi Zero
 ```bash
 $ make BR2_EXTERNAL=/path/to/br2-external-adsb adsb_orangepi_zero_defconfig
@@ -69,13 +73,22 @@ Telegram Bot supports the following simple commands:
 
 ### Overview
 
-External layer for experimenting with Linux BlueZ bluetooth software. Supported board configurations:
+External layer for experimenting with Linux BlueZ bluetooth software.
 
+Major purposes:
+* integration of BlueZ components into systemd
+* enable autonomous Linux bluetooth startup procedures: make them work seamlessly out of the box
+* experiment with Linux CAN software
+
+Supported board configurations:
 * WIP: Bluetooth RFCOMM serial access to Raspberry Pi Zero W board
 ```bash
 $ make BR2_EXTERNAL=/path/to/br2-external-bluetooth connect_rpi0w_rfcomm_defconfig
 ```
 * TODO: ELM237 CAN logger using Raspberry Pi Zero W board
+```bash
+$ make BR2_EXTERNAL=/path/to/br2-external-bluetooth connect_rpi0w_can_defconfig
+```
 
 ### Build and flash image
 
@@ -124,7 +137,13 @@ $ sudo minicom -D /dev/rfcomm0
 
 ### Overview
 
-External layer for experimenting with Linux Connman/oFono stack. Supported board configurations:
+External layer for experimenting with Linux Connman stack.
+
+Major purposes:
+* experiment Connman/oFono/Neard stack
+* enable autonomous Linux Connman startup and provisioning procedures: make them work seamlessly out of the box
+
+Supported board configurations:
 
 * switching between Ethernet and WiFi on Orange Pi Zero board
 ```bash
@@ -177,7 +196,13 @@ Obviously there should be some configuration switch to enable gadget by default.
 
 ### Overview
 
-External layer for experiments with various Linux video capture software. Supported configurations:
+External layer for experiments with various Linux video capture software.
+
+Major purposes:
+* experiment with hotplug device configurations in systemd
+* experiment with Linux video capture software
+
+Supported configurations:
 
 * timelapse server on Orange Pi Zero board
 ```bash
