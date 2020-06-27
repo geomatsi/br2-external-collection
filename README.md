@@ -30,7 +30,7 @@ $ git checkout -b v2020.02.3 2020.02.3
 External layer for ADS-B capture using _dump1090_ and _RTL-SDR dongle_ and simple remote access to captured data using Telegram bot.
 
 Major purposes:
-* integration of Golang application into Buildroot
+* integrate Golang application into Buildroot
 
 Supported board configurations:
 * ADSB Bot on Orange Pi Zero
@@ -46,7 +46,7 @@ $ time make
 
 Follow Buildroot instruction and write image to SDcard. Before booting device, mount SDcard and edit the following files:
 * `/etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf` to setup wireless access
-* `/etc/openvpn/client.conf` and `/etc/openvpn/pass` to setup VPN client and enable Telegram Bot
+* `/etc/openvpn/client.conf` and `/etc/openvpn/pass` to setup VPN connection for Telegram Bot
 * `/etc/adsb/adsb_bot.conf` to setup authentication token for Telegram Bot
 
 ### ADS-B
@@ -76,12 +76,11 @@ Telegram Bot supports the following simple commands:
 External layer for experimenting with Linux BlueZ bluetooth software.
 
 Major purposes:
-* integration of BlueZ components into systemd
-* enable autonomous Linux bluetooth startup procedures: make them work seamlessly out of the box
+* integrate BlueZ components into systemd to enable seamless Linux bluetooth bring-up on boot
 * experiment with Linux CAN software
 
 Supported board configurations:
-* Bluetooth RFCOMM serial access to Raspberry Pi Zero W board
+* RFCOMM serial access to Raspberry Pi Zero W board
 ```bash
 $ make BR2_EXTERNAL=/path/to/br2-external-bluetooth connect_rpi0w_rfcomm_defconfig
 ```
@@ -97,27 +96,28 @@ $ time make
 ```
 
 Follow Buildroot instructions and write image to SDcard. Before booting device, mount SDcard and edit several files to customize WiFi and Bluetooth settings:
-
-For Raspberry Zero W board:
-* `var/lib/connman/wifi_test1.config` to configure AP name and password for wireless access
-* `var/lib/bluetooth/XX:XX:XX:XX:XX:XX` rename directory to MAC address of rpi0w board under test to make it discoverable
-
-Note that for Raspberry Zero W connman step is particularly important since selected DTS overlay enables bluetooth but disables UART port.
+* `/var/lib/connman/wifi_test1.config`: edit to configure AP name and password for wireless access
+* `/var/lib/bluetooth/XX:XX:XX:XX:XX:XX`:rename directory to MAC address of rpi0w board under test
 
 ### Access rpi0w serial console using Bluetooth rfcomm
 
 Serial access to rpi0w board via Bluetooth rfcomm should be available right out of the box:
 - bluetooth enablement is handled by systemd: see rfcomm and btattach services
-- discovery and pairing is enabled by bluetooth configuration files: see /etc/bluetooth/main.conf and var/lib/bluetooth/XX:XX:XX:XX:XX:XX/settings
+- discovery and pairing is enabled by bluetooth configuration files:
+  -- see `/etc/bluetooth/main.conf` and `/var/lib/bluetooth/XX:XX:XX:XX:XX:XX/settings`
 
 Execute the following steps on host:
 
 * Configure bluetooth on host:
 Use bluetoothctl tool to bring-up controller on host, then to scan and to pair with rpi0w:
 ```bash
-$ bluetoothctl power on
-$ bluetoothctl scan on
-$ bluetoothctl pair XX:XX:XX:XX:XX:XX
+$ sudo systemctl start bluetooth
+$ bluetoothctl
+[bluetooth]# power on
+[bluetooth]# scan on
+[bluetooth]# pair XX:XX:XX:XX:XX:XX
+[bluetooth]# quit
+$ 
 ```
 * Configure rfcomm on host:
 Setup rfcomm and connect to rpi0w after pairing is successfully completed:
@@ -126,7 +126,7 @@ $ sudo rfcomm bind 0 XX:XX:XX:XX:XX:XX
 $ sudo minicom -D /dev/rfcomm0
 ```
 
-Instead of XX:XX:XX:XX:XX:XX use bluetooth MAC address of rpi0w board under test.
+Here replace XX:XX:XX:XX:XX:XX by bluetooth MAC address of rpi0w board under test.
 
 ## br2-external-connect
 
@@ -135,8 +135,8 @@ Instead of XX:XX:XX:XX:XX:XX use bluetooth MAC address of rpi0w board under test
 External layer for experimenting with Linux Connman stack.
 
 Major purposes:
-* experiment Connman/oFono/Neard stack
-* enable autonomous Linux Connman startup and provisioning procedures: make them work seamlessly out of the box
+* experiment with connman/ofono/neard stack
+* clean up connman startup and provisioning procedures: make them work seamlessly out of the box
 
 Supported board configurations:
 
@@ -157,15 +157,12 @@ $ time make
 
 Follow Buildroot instructions and write image to SDcard. Before booting device, mount SDcard and edit several files to make sure that WiFi connects on boot.
 
-For Orange Pi Zero board:
-* `var/lib/connman/eth_test1.config` to configure static IPv4 config or DHCP for wired access
-* `var/lib/connman/wifi_test1.config` to configure AP name and password for wireless access
+For Orange Pi Zero board with `connect_orangepi_zero_defconfig` image:
+* `/var/lib/connman/eth_test1.config` to configure static IPv4 config or DHCP for wired access
+* `/var/lib/connman/wifi_test1.config` to configure AP name and password for wireless access
 
-For Raspberry Zero W board:
-* `var/lib/connman/wifi_test1.config` to configure AP name and password for wireless access
-
-Note that for Raspberry Zero W this step is particularly important since selected DTS overlay
-enables USB gadget but disables UART port.
+For Raspberry Zero W board with `connect_rpi0w_gadget_defconfig` image:
+* `/var/lib/connman/wifi_test1.config` to configure AP name and password for wireless access
 
 ### TODO
 
@@ -194,7 +191,7 @@ Obviously there should be some configuration switch to enable gadget by default.
 External layer for experiments with various Linux video capture software.
 
 Major purposes:
-* experiment with hotplug device configurations in systemd
+* experiment with hotplug devices configurations in systemd
 * experiment with Linux video capture software
 
 Supported configurations:
@@ -210,7 +207,10 @@ $ make BR2_EXTERNAL=/path/to/br2-external-usbcam timelapse_orangepi_zero_defconf
 $ time make
 ```
 
-Follow Buildroot instruction and write image to SDcard. Before booting device, mount SDcard and edit `/etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf` to setup wireless access.
+Follow Buildroot instructions and write image to SDcard. Before booting device, mount SDcard and edit several files to make sure that WiFi connects on boot.
+
+For Orange Pi Zero board with `timelapse_orangepi_zero_defconfig` image:
+* `/etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf` to setup wireless access
 
 ### Stream and capture
 
