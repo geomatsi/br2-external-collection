@@ -104,7 +104,7 @@ Follow Buildroot instructions and write image to SDcard. Before booting device, 
 Serial access to rpi0w board via Bluetooth rfcomm should be available right out of the box:
 - bluetooth enablement is handled by systemd: see rfcomm and btattach services
 - discovery and pairing is enabled by bluetooth configuration files:
-  -- see `/etc/bluetooth/main.conf` and `/var/lib/bluetooth/XX:XX:XX:XX:XX:XX/settings`
+  - see `/etc/bluetooth/main.conf` and `/var/lib/bluetooth/XX:XX:XX:XX:XX:XX/settings`
 
 Execute the following steps on host:
 
@@ -117,7 +117,6 @@ $ bluetoothctl
 [bluetooth]# scan on
 [bluetooth]# pair XX:XX:XX:XX:XX:XX
 [bluetooth]# quit
-$ 
 ```
 * Configure rfcomm on host:
 Setup rfcomm and connect to rpi0w after pairing is successfully completed:
