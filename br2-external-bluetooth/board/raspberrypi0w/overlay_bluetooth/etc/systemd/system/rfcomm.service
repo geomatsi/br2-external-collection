@@ -1,0 +1,11 @@
+[Unit]
+Description=RFcomm console service
+After=bluetooth.service
+Requires=bluetooth.service
+
+[Service]
+Type=simple
+ExecStart=/bin/rfcomm watch /dev/rfcomm0 1 /sbin/agetty rfcomm0 115200 linux
+
+[Install]
+WantedBy=multi-user.target

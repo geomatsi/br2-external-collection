@@ -1,0 +1,12 @@
+[Unit]
+Description=Attach BT controller HCI UART device becomes available
+Before=bluetooth.service
+Wants=dev-ttyAMA0.device
+After=dev-ttyAMA0.device
+
+[Service]
+Type=simple
+ExecStart=/bin/btattach -B /dev/ttyAMA0 -P bcm -S 921600
+
+[Install]
+WantedBy=multi-user.target

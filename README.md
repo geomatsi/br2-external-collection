@@ -81,7 +81,7 @@ Major purposes:
 * experiment with Linux CAN software
 
 Supported board configurations:
-* WIP: Bluetooth RFCOMM serial access to Raspberry Pi Zero W board
+* Bluetooth RFCOMM serial access to Raspberry Pi Zero W board
 ```bash
 $ make BR2_EXTERNAL=/path/to/br2-external-bluetooth connect_rpi0w_rfcomm_defconfig
 ```
@@ -96,42 +96,37 @@ $ make BR2_EXTERNAL=/path/to/br2-external-bluetooth connect_rpi0w_can_defconfig
 $ time make
 ```
 
-Follow Buildroot instructions and write image to SDcard. Before booting device, mount SDcard and edit several files to make sure that WiFi connects on boot.
+Follow Buildroot instructions and write image to SDcard. Before booting device, mount SDcard and edit several files to customize WiFi and Bluetooth settings:
 
 For Raspberry Zero W board:
 * `var/lib/connman/wifi_test1.config` to configure AP name and password for wireless access
+* `var/lib/bluetooth/XX:XX:XX:XX:XX:XX` rename directory to MAC address of rpi0w board under test to make it discoverable
 
-Note that for Raspberry Zero W this step is particularly important since selected DTS overlay
-enables USB gadget but disables UART port.
+Note that for Raspberry Zero W connman step is particularly important since selected DTS overlay enables bluetooth but disables UART port.
 
-### TODO
+### Access rpi0w serial console using Bluetooth rfcomm
 
-#### Bluetooth autostart
+Serial access to rpi0w board via Bluetooth rfcomm should be available right out of the box:
+- bluetooth enablement is handled by systemd: see rfcomm and btattach services
+- discovery and pairing is enabled by bluetooth configuration files: see /etc/bluetooth/main.conf and var/lib/bluetooth/XX:XX:XX:XX:XX:XX/settings
 
-Bluetooth is not yet wrapped into proper autonomous sequence of systemd unit files and connman/bluez configuration files. For now this is a collection of commands on both rpi0-w and host to establish rfcomm serial access to rpi0-w board over bluetooth.
+Execute the following steps on host:
 
-* Enable bluetooth on rpi0-w and setup rfcomm:
-```bash
-$ hciattach /dev/ttyAMA0 bcm43xx 921600 flow
-$ rfkill unblock bluetooth
-$ rfcomm watch /dev/rfcomm0 1 /sbin/agetty rfcomm0 115200 linux
-```
-* Use bluetoothctl tool to bring-up controllers on both host and rpi0w:
+* Configure bluetooth on host:
+Use bluetoothctl tool to bring-up controller on host, then to scan and to pair with rpi0w:
 ```bash
 $ bluetoothctl power on
-$ bluetoothctl discoverable on
-```
-* Use bluetoothctl tool on host to pair with rpi0w:
-```bash
 $ bluetoothctl scan on
-$ bluetoothctl pair <peer MAC>
+$ bluetoothctl pair XX:XX:XX:XX:XX:XX
 ```
-Note that for now you will have confirm pin on both host and rpi0w
-* Setup rfcomm serial connection on host:
+* Configure rfcomm on host:
+Setup rfcomm and connect to rpi0w after pairing is successfully completed:
 ```bash
-$ sudo rfcomm bind 0 <rpi0-w bt MAC address>
+$ sudo rfcomm bind 0 XX:XX:XX:XX:XX:XX
 $ sudo minicom -D /dev/rfcomm0
 ```
+
+Instead of XX:XX:XX:XX:XX:XX use bluetooth MAC address of rpi0w board under test.
 
 ## br2-external-connect
 
