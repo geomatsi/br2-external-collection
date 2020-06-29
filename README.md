@@ -195,9 +195,14 @@ Major purposes:
 
 Supported configurations:
 
-* timelapse server on Orange Pi Zero board
+* timelapse server on Orange Pi Zero board: WiFi STA mode
 ```bash
 $ make BR2_EXTERNAL=/path/to/br2-external-usbcam timelapse_orangepi_zero_defconfig
+```
+
+* timelapse server on Orange Pi Zero Plus2 board: WiFi AP mode
+```bash
+$ make BR2_EXTERNAL=/path/to/br2-external-usbcam apcam_orangepi_zero_plus2_defconfig
 ```
 
 ### Build and flash image
@@ -210,6 +215,11 @@ Follow Buildroot instructions and write image to SDcard. Before booting device, 
 
 For Orange Pi Zero board with `timelapse_orangepi_zero_defconfig` image:
 * `/etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf` to setup wireless access
+
+For Orange Pi Zero board with `apcam_orangepi_zero_plus2_defconfig` image everything is up and running right out of the box:
+* WiFi AP: SSID apcam, PSK topsecret
+* AP IPv4 address: 192.168.100.1
+* Note that Orange Pi Zero Plus2 does not have USB on board, so expansion board should be attached
 
 ### Stream and capture
 
