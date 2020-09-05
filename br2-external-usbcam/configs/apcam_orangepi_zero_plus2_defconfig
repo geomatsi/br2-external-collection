@@ -67,7 +67,7 @@ BR2_TARGET_ROOTFS_EXT2_SIZE="512M"
 # image
 BR2_ROOTFS_POST_IMAGE_SCRIPT="support/scripts/genimage.sh"
 BR2_ROOTFS_POST_SCRIPT_ARGS="-c board/orangepi/orangepi-zero-plus2/genimage.cfg"
-BR2_ROOTFS_OVERLAY="$(BR2_EXTERNAL_USBCAM_PATH)/board/orangepi/orangepi-zero-plus2/overlay/"
+BR2_ROOTFS_OVERLAY="$(BR2_EXTERNAL_USBCAM_PATH)/board/orangepi/orangepi-zero-plus2/overlay-ap/"
 
 # systemd
 BR2_PACKAGE_SYSTEMD_LOGIND=y
