@@ -1,0 +1,8 @@
+[Unit]
+Description=MJPG streamer for %I webcam
+After=syslog.target network.target
+BindsTo=dev-%i.device
+After=dev-%i.device
+
+[Service]
+ExecStart=/usr/bin/mjpg_streamer -i "/usr/lib/mjpg-streamer/input_uvc.so -yuv -d /dev/%i" -o "/usr/lib/mjpg-streamer/output_http.so -p 8080 -w /var/www"

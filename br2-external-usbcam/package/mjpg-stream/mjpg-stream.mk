@@ -16,10 +16,4 @@ MJPG_STREAM_CONF_OPTS += -DPLUGIN_INPUT_OPENCV=OFF
 MJPG_STREAM_CONF_OPTS += -DPLUGIN_OUTPUT_ZMQSERVER=OFF
 MJPG_STREAM_CONF_OPTS += -DPLUGIN_OUTPUT_VIEWER=OFF
 
-define MJPG_STREAM_INSTALL_INIT_SYSTEMD
-	$(INSTALL) -D -m 644 $(BR2_EXTERNAL_USBCAM_PATH)/package/mjpg-stream/mjpg_streamer.service \
-		$(TARGET_DIR)/usr/lib/systemd/system/mjpg_streamer.service
-endef
-
-
 $(eval $(cmake-package))
