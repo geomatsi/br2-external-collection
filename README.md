@@ -4,11 +4,11 @@
 
 Collection of Buildroot BR2_EXTERNAL examples:
 
-* [br2-external-adsb](br2-external-adsb/README.md)
-* [br2-external-bluetooth](br2-external-bluetooth/README.md)
-* [br2-external-connect](br2-external-connect/README.md)
-* [br2-external-system](br2-external-system/README.md)
-* [br2-external-usbcam](br2-external-usbcam/README.md)
+* [br2-external-adsb](br2-external-adsb)
+* [br2-external-bluetooth](br2-external-bluetooth)
+* [br2-external-connect](br2-external-connect)
+* [br2-external-system](br2-external-system)
+* [br2-external-usbcam](br2-external-usbcam)
 
 ## Get sources
 
