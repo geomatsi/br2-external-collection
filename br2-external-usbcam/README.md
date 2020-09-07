@@ -5,7 +5,7 @@
 External layer for experiments with various Linux video capture software.
 
 Major purposes:
-* experiment with hotplug devices configurations in systemd
+* experiment with devices hotplug in systemd
 * experiment with Linux video capture software
 
 Supported configurations:
@@ -13,6 +13,11 @@ Supported configurations:
 * timelapse server on Orange Pi Zero board: WiFi STA mode
 ```bash
 $ make BR2_EXTERNAL=/path/to/br2-external-usbcam timelapse_orangepi_zero_defconfig
+```
+
+* timelapse server on Orange Pi Zero Plus2 board: WiFi STA mode
+```bash
+$ make BR2_EXTERNAL=/path/to/br2-external-usbcam timelapse_orangepi_zero_plus2_defconfig
 ```
 
 * timelapse server on Orange Pi Zero Plus2 board: WiFi AP mode
@@ -28,7 +33,7 @@ $ time make
 
 Follow Buildroot instructions and write image to SDcard. Before booting device, mount SDcard and edit several files to make sure that WiFi connects on boot.
 
-For Orange Pi Zero board with `timelapse_orangepi_zero_defconfig` image:
+For `timelapse_orangepi_zero_defconfig` and `timelapse_orangepi_zero_pluse2` images:
 * Edit `/etc/wpa_supplicant/wpa_supplicant-nl80211-wlan0.conf` to setup wireless access
 
 For Orange Pi Zero Plus2 board with `apcam_orangepi_zero_plus2_defconfig` image everything is up and running right out of the box:
