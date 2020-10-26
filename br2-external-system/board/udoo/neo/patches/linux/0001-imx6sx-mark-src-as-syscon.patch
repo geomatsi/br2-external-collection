@@ -1,0 +1,13 @@
+diff --git a/arch/arm/boot/dts/imx6sx.dtsi b/arch/arm/boot/dts/imx6sx.dtsi
+index b480dfa9e251..9cd9e0ff8fef 100644
+--- a/arch/arm/boot/dts/imx6sx.dtsi
++++ b/arch/arm/boot/dts/imx6sx.dtsi
+@@ -775,7 +775,7 @@ epit2: epit@20d4000 {
+ 			};
+ 
+ 			src: reset-controller@20d8000 {
+-				compatible = "fsl,imx6sx-src", "fsl,imx51-src";
++				compatible = "fsl,imx6sx-src", "fsl,imx51-src", "syscon";
+ 				reg = <0x020d8000 0x4000>;
+ 				interrupts = <GIC_SPI 91 IRQ_TYPE_LEVEL_HIGH>,
+ 					     <GIC_SPI 96 IRQ_TYPE_LEVEL_HIGH>;
