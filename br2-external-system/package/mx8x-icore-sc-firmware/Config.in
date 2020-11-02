@@ -1,0 +1,7 @@
+config BR2_PACKAGE_MX8X_ICORE_SC_FIRMWARE
+	bool "mx8x-icore-sc-firmware"
+	depends on BR2_aarch64
+	help
+	  System Control Unit Firmware blobs for the Engicam mx8x iCore SOM modules.
+
+	  This library is provided by Engicam as-is and doesn't have an upstream.
