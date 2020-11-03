@@ -1,0 +1,11 @@
+[Match]
+Name=usb0
+
+[Network]
+Address=20.0.0.1/24
+DHCPServer=true
+
+[DHCPServer]
+PoolOffset=10
+PoolSize=80
+EmitRouter=no

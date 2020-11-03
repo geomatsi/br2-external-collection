@@ -11,7 +11,7 @@ MX8X_ICORE_SC_FIRMWARE_LICENSE = Proprietary
 MX8X_ICORE_SC_FIRMWARE_REDISTRIBUTE = NO
 
 define MX8X_ICORE_SC_FIRMWARE_INSTALL_TARGET_CMDS
-	install -m 666 $(@D)/mx8qx-icore-scfw-tcm.bin ${BINARIES_DIR}/
+	install -m 666 $(@D)/mx8qx-icore-scfw-tcm.bin ${BINARIES_DIR}/mx8qx-mek-scfw-tcm.bin
 	
 endef
 
