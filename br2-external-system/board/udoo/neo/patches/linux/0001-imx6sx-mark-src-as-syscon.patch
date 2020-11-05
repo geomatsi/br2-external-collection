@@ -1,11 +1,11 @@
 diff --git a/arch/arm/boot/dts/imx6sx.dtsi b/arch/arm/boot/dts/imx6sx.dtsi
-index b480dfa9e251..9cd9e0ff8fef 100644
+index 7da572cbee48..91921e29fa7f 100644
 --- a/arch/arm/boot/dts/imx6sx.dtsi
 +++ b/arch/arm/boot/dts/imx6sx.dtsi
-@@ -775,7 +775,7 @@ epit2: epit@20d4000 {
+@@ -869,7 +869,7 @@
  			};
  
- 			src: reset-controller@20d8000 {
+ 			src: src@20d8000 {
 -				compatible = "fsl,imx6sx-src", "fsl,imx51-src";
 +				compatible = "fsl,imx6sx-src", "fsl,imx51-src", "syscon";
  				reg = <0x020d8000 0x4000>;
