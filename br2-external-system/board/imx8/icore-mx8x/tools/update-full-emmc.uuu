@@ -1,0 +1,10 @@
+uuu_version 1.2.39
+
+SDPS: boot -f imx8-boot-sd.bin
+
+FB: ucmd setenv fastboot_dev mmc
+FB: ucmd setenv emmcboot 1
+FB: ucmd setenv mmcdev ${emmc_dev}
+FB: ucmd mmc dev ${emmc_dev}
+FB: flash -raw2sparse all sdcard.img
+FB: done
