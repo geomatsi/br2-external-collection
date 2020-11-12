@@ -1,3 +1,16 @@
+From 8838b178b96f1c5427e7261fb657dc8d0645dde6 Mon Sep 17 00:00:00 2001
+From: Sergey Matyukevich <geomatsi@gmail.com>
+Date: Thu, 12 Nov 2020 22:34:54 +0300
+Subject: [PATCH 1/3] arm: dts: imx6sx: mark src as syscon
+
+Mark reset controller as syscon to make it usable from
+imx remoteproc driver.
+
+Signed-off-by: Sergey Matyukevich <geomatsi@gmail.com>
+---
+ arch/arm/boot/dts/imx6sx.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 diff --git a/arch/arm/boot/dts/imx6sx.dtsi b/arch/arm/boot/dts/imx6sx.dtsi
 index 7da572cbee48..91921e29fa7f 100644
 --- a/arch/arm/boot/dts/imx6sx.dtsi
@@ -11,3 +24,6 @@ index 7da572cbee48..91921e29fa7f 100644
  				reg = <0x020d8000 0x4000>;
  				interrupts = <GIC_SPI 91 IRQ_TYPE_LEVEL_HIGH>,
  					     <GIC_SPI 96 IRQ_TYPE_LEVEL_HIGH>;
+-- 
+2.29.2
+
