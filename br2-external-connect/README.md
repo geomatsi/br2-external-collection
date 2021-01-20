@@ -18,6 +18,22 @@ $ make BR2_EXTERNAL=/path/to/br2-external-connect connect_orangepi_zero_defconfi
 ```bash
 $ make BR2_EXTERNAL=/path/to/br2-external-connect connect_rpi0w_gadget_defconfig
 ```
+* Cellular connectivity using SIM800L modem and STM32MP157C-DK2 board:
+```bash
+$ make BR2_EXTERNAL=/path/to/br2-external-connect gsm_stm32mp157c_dk2_defconfig
+```
+
+## Cellular connectivity using SIM800L modem
+Hardware connections:
+
+| Modem | Board | Comments |
+|-|-|-|
+| TX  | PE7 (USART7_RX) | pin 1 on CN14 connector |
+| RX  | PE8 (USART7_TX) | pin 2 on CN14 connector |
+| RST | PE1 | pin 3 on CN14 connector |
+
+Note that modem SIM800L can not be powered from the board since neither 3v3 nor 5v0 are suitable for its proper operations.
+Its operating voltage should be between 3v5 and 4v4. The simplest option is to power modem using a separate Li-Ion battery.
 
 ## Build and flash image
 
@@ -25,7 +41,7 @@ $ make BR2_EXTERNAL=/path/to/br2-external-connect connect_rpi0w_gadget_defconfig
 $ time make
 ```
 
-Follow Buildroot instructions and write image to SDcard. Before booting device, mount SDcard and edit several files to make sure that WiFi connects on boot.
+Follow Buildroot instructions and write image to SDcard. Before booting device, mount SDcard and edit several files to make sure that WiFi or Ethernet connects on boot.
 
 For Orange Pi Zero board with `connect_orangepi_zero_defconfig` image:
 * `/var/lib/connman/eth_test1.config` to configure static IPv4 config or DHCP for wired access
@@ -33,6 +49,10 @@ For Orange Pi Zero board with `connect_orangepi_zero_defconfig` image:
 
 For Raspberry Zero W board with `connect_rpi0w_gadget_defconfig` image:
 * `/var/lib/connman/wifi_test1.config` to configure AP name and password for wireless access
+
+For STM32MP157C-DK2 board with `gsm_stm32mp157c_dk2_defconfig` image:
+* `/var/lib/connman/eth_test1.config` to configure static IPv4 config or DHCP for wired access
+
 
 ## TODO
 
