@@ -1,0 +1,13 @@
+[Unit]
+Description=Telephony service
+After=syslog.target
+
+[Service]
+Type=dbus
+BusName=org.ofono
+ExecStartPre=-/etc/scripts/modem-reset
+ExecStart=/usr/sbin/ofonod -n
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

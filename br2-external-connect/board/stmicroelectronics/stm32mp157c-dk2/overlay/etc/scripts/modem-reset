@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Connect PE1 to modem RST pin
+CHIP=4
+GPIO=1
+
+# Pull RST pin low for 100ms to reset modem
+RESET=100000
+
+# Wait for modem to complete boot
+START=2
+
+gpioset ${CHIP} ${GPIO}=1
+gpioset -m time -u ${RESET} ${CHIP} ${GPIO}=0
+gpioset -m time -s ${START} ${CHIP} ${GPIO}=1
