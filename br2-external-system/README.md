@@ -33,6 +33,11 @@ $ make BR2_EXTERNAL=/path/to/br2-external-system rproc_mx8qx_icore_defconfig
 $ make BR2_EXTERNAL=/path/to/br2-external-system rproc_stm32mp157c_dk2_defconfig
 ```
 
+* Experiments with non-trusted stm32mp157c-dk2 config: U-Boot SPL w/o TF-A
+```bash
+$ make BR2_EXTERNAL=/path/to/br2-external-system stm32mp157c_dk2_nontrusted_defconfig
+```
+
 Note: remoteproc/rpmsg configs works with Buildroot starting from 2020.11 release.
 
 ## Build and flash image
