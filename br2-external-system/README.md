@@ -35,11 +35,6 @@ Tested with Buildroot v2021.08.
 $ make BR2_EXTERNAL=/path/to/br2-external-system rproc_mx6sx_udoo_neo_defconfig
 ```
 
-* Experiments with Cortex-M4 core on Engicam i.Core MX8X board with i.MX8QXP CPU using Linux remoteproc/rpmsg subsystem
-```bash
-$ make BR2_EXTERNAL=/path/to/br2-external-system rproc_mx8qx_icore_defconfig
-```
-
 * Experiments with Cortex-M4 core on stm32mp157c-dk2 board using Linux remoteproc/rpmsg subsystem
 ```bash
 $ make BR2_EXTERNAL=/path/to/br2-external-system rproc_stm32mp157c_dk2_defconfig
@@ -106,25 +101,6 @@ $ crictl exec -it bf85f83f2610c /bin/sh
 ## Running firmware on Cortex-M4 cores
 
 ### Udoo Neo: i.MX6SoloX CPU
-
-TODO
-
-### i.Core MX8X: i.MX8QXP CPU
-
-#### Flash Buildroot image using UUU
-
-Use boot switches to configure board boot over USB. Then write Buildroot image to the on-board eMMC using UUU tool:
-
-```bash
-$ cd output/images
-$ sudo uuu sdps: boot -f imx8-boot-sd.bin
-$ sudo uuu fb: ucmd setenv fastboot_dev mmc
-$ sudo uuu fb: ucmd setenv mmcdev 0
-$ sudo uuu fb: ucmd mmc dev 0
-$ sudo uuu fb: flash -raw2sparse all sdcard.img
-```
-
-#### Run Cortex-M4 firmware
 
 TODO
 

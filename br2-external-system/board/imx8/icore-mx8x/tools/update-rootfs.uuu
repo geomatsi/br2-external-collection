@@ -1,4 +1,0 @@
-uuu_version 1.2.39
-
-FB: flash -raw2sparse mmcsda2 rootfs.ext2
-FB: done
