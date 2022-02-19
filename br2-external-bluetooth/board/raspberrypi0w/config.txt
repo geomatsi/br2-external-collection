@@ -1,8 +1,11 @@
 # Please note that this is only a sample, we recommend you to change it to fit
 # your needs.
-# You should override this file using a post-build script.
+# You should override this file using BR2_PACKAGE_RPI_FIRMWARE_CONFIG_FILE.
 # See http://buildroot.org/manual.html#rootfs-custom
 # and http://elinux.org/RPiconfig for a description of config.txt syntax
+
+start_file=start.elf
+fixup_file=fixup.dat
 
 kernel=zImage
 
@@ -19,5 +22,6 @@ gpu_mem_256=100
 gpu_mem_512=100
 gpu_mem_1024=100
 
-# selects the dwc2 USB controller driver in gadget mode
-dtoverlay=dwc2,dr_mode=peripheral
+# good uart for bt and miniuart for serial
+enable_uart=1
+dtoverlay=
