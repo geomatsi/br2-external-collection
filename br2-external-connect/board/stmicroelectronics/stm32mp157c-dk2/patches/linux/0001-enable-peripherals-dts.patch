@@ -1,14 +1,8 @@
 diff --git a/arch/arm/boot/dts/stm32mp157c-dk2.dts b/arch/arm/boot/dts/stm32mp157c-dk2.dts
-index 9a8a26710ac1..eb0b256ed0fe 100644
+index 2bc92ef3aeb9..3cb270dda4d5 100644
 --- a/arch/arm/boot/dts/stm32mp157c-dk2.dts
 +++ b/arch/arm/boot/dts/stm32mp157c-dk2.dts
-@@ -19,11 +19,17 @@ / {
- 	aliases {
- 		ethernet0 = &ethernet0;
- 		serial0 = &uart4;
-+		serial1 = &uart7;
- 	};
- 
+@@ -27,6 +27,11 @@ aliases {
  	chosen {
  		stdout-path = "serial0:115200n8";
  	};
@@ -19,10 +13,10 @@ index 9a8a26710ac1..eb0b256ed0fe 100644
 +	};
  };
  
- &dsi {
-@@ -84,3 +90,32 @@ ltdc_ep1_out: endpoint@1 {
- 		};
- 	};
+ &cryp1 {
+@@ -99,3 +104,32 @@ &usart2 {
+ 	pinctrl-2 = <&usart2_idle_pins_c>;
+ 	status = "disabled";
  };
 +
 +/* wifi */
