@@ -21,3 +21,6 @@ gpu_mem_1024=100
 
 # selects the dwc2 USB controller driver in gadget mode
 dtoverlay=dwc2,dr_mode=peripheral
+
+# bt is not needed here, use fast uart for console
+dtoverlay=disable-bt
