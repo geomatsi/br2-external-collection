@@ -1,1 +1,0 @@
-source "$BR2_EXTERNAL_USBCAM_PATH/package/mjpg-stream/Config.in"
