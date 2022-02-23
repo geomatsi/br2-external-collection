@@ -1,4 +1,4 @@
-source "$BR2_EXTERNAL_SYSTEM_PATH/package/cni-plugins/Config.in
+source "$BR2_EXTERNAL_SYSTEM_PATH/package/cni-plugins/Config.in"
 source "$BR2_EXTERNAL_SYSTEM_PATH/package/cni/Config.in"
 source "$BR2_EXTERNAL_SYSTEM_PATH/package/conmon/Config.in"
 source "$BR2_EXTERNAL_SYSTEM_PATH/package/cri-tools/Config.in"
