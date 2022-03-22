@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-CNI_PLUGINS_VERSION = v1.0.1
+CNI_PLUGINS_VERSION = v1.1.1
 CNI_PLUGINS_SITE = $(call github,containernetworking,plugins,$(CNI_PLUGINS_VERSION))
 
 CNI_PLUGINS_LICENSE = Apache-2.0

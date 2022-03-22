@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-CRI_TOOLS_VERSION = v1.21.0
+CRI_TOOLS_VERSION = v1.23.0
 CRI_TOOLS_SITE = $(call github,kubernetes-sigs,cri-tools,$(CRI_TOOLS_VERSION))
 
 CRI_TOOLS_LICENSE = Apache-2.0

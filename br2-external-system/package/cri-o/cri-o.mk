@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-CRI_O_VERSION = v1.21.2
+CRI_O_VERSION = v1.23.2
 CRI_O_SITE = $(call github,cri-o,cri-o,$(CRI_O_VERSION))
 
 CRI_O_LICENSE = Apache-2.0
