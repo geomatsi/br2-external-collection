@@ -3,6 +3,5 @@ config BR2_PACKAGE_CONMON
 	depends on BR2_TOOLCHAIN_HAS_THREADS
 	select BR2_PACKAGE_LIBSECCOMP
 	select BR2_PACKAGE_LIBGLIB2
-	select BR2_PACKAGE_RUNC
 	help
 	  An OCI container runtime monitor.
