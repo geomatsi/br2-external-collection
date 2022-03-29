@@ -12,16 +12,24 @@ Collection of Buildroot BR2_EXTERNAL examples:
 
 ## Get sources
 
+---
+**NOTE**
+
+All the examples have been tested on top of the following Buildroot baseline:
+* branch: 2022.x
+* commit: 96b346cb56ccf5ef52b29d367db5149d212c45df
+---
+
 Check out source tree:
 ```bash
 $ git https://github.com/geomatsi/br2-external-collection.git
 ```
 
-Get Buildroot release branch:
+Get Buildroot 2022.x release branch:
 ```bash
 $ git clone git://git.buildroot.net/buildroot buildroot-release
 $ cd buildroot-release
-$ git checkout -b v2020.02.3 2020.02.3
+$ git checkout -b rel-2022.02.x origin/2022.02.x
 ```
 
 ## Prepare selected configuration
