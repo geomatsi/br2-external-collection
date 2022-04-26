@@ -1,0 +1,24 @@
+config BR2_PACKAGE_PODMAN
+	bool "podman"
+	depends on BR2_PACKAGE_HOST_GO_TARGET_ARCH_SUPPORTS
+	depends on BR2_PACKAGE_HOST_GO_TARGET_CGO_LINKING_SUPPORTS
+	depends on BR2_TOOLCHAIN_HAS_THREADS
+	select BR2_PACKAGE_BTRFS_PROGS
+	select BR2_PACKAGE_LIBSECCOMP
+	select BR2_PACKAGE_CRUN
+	select BR2_PACKAGE_CONMON
+	select BR2_PACKAGE_CATATONIT
+	select BR2_PACKAGE_CNI
+	select BR2_PACKAGE_LIBGPGME
+	select BR2_PACKAGE_LVM2
+	select BR2_PACKAGE_E2FSPROGS
+	select BR2_PACKAGE_UTIL_LINUX
+	select BR2_PACKAGE_IPTABLES
+	select BR2_PACKAGE_CGROUPFS_MOUNT if !BR2_INIT_SYSTEMD
+	select BR2_PACKAGE_CONNTRACK_TOOLS
+	select BR2_PACKAGE_UTIL_LINUX_PIVOT_ROOT
+	select BR2_PACKAGE_UTIL_LINUX_MOUNTPOINT
+	help
+	  Podman is a daemonless container engine for developing, managing,
+	  and running OCI Containers on your Linux System. Containers can
+	  either be run as root or in rootless mode.
