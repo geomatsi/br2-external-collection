@@ -1,0 +1,4 @@
+config BR2_PACKAGE_CATATONIT
+	bool "catatonit"
+	help
+	  A simple container init.

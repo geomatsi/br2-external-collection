@@ -1,0 +1,15 @@
+diff --git a/catatonit.c b/catatonit.c
+index 26a0bd6..164b415 100644
+--- a/catatonit.c
++++ b/catatonit.c
+@@ -35,9 +35,7 @@
+ #include <limits.h>
+ #include <dirent.h>
+ 
+-#ifdef HAVE_CLOSE_RANGE
+-# include <linux/close_range.h>
+-#else
++#ifndef HAVE_CLOSE_RANGE
+ # include <sys/syscall.h>
+ #endif
+ 
