@@ -5,10 +5,7 @@
 External layer for experiments with various Linux system features.
 
 Major purposes:
-* experiments with read-only rootfs and initramfs
-* experiments with GPT partition tables
-* experiments with docker
-* experiments with A/B system image updates
+* experiments with docker, cri-o, podman
 * experiments with remoteproc/rpmsg kernel frameworks
 
 Supported configurations:
@@ -22,13 +19,16 @@ $ make BR2_EXTERNAL=/path/to/br2-external-system docker_orangepi_zero_plus2_defc
 ```bash
 $ make BR2_EXTERNAL=/path/to/br2-external-system docker_orangepi_pc_plus_defconfig
 ```
-Tested with Buildroot v2021.08.
 
 * Running CRI-O on Orange Pi PC Plus board
 ```bash
 $ make BR2_EXTERNAL=/path/to/br2-external-system crio_orangepi_pc_plus_defconfig
 ```
-Tested with Buildroot v2021.08.
+
+* Running podman on Orange Pi PC Plus board
+```bash
+$ make BR2_EXTERNAL=/path/to/br2-external-system podman_orangepi_pc_plus_defconfig
+```
 
 * Experiments with Cortex-M4 core on Udoo Neo board with iMX6SoloX CPU using Linux remoteproc/rpmsg subsystem
 ```bash
@@ -44,8 +44,6 @@ $ make BR2_EXTERNAL=/path/to/br2-external-system rproc_stm32mp157c_dk2_defconfig
 ```bash
 $ make BR2_EXTERNAL=/path/to/br2-external-system stm32mp157c_dk2_nontrusted_defconfig
 ```
-
-Note: remoteproc/rpmsg configs works with Buildroot starting from 2020.11 release.
 
 ## Build and flash image
 
@@ -96,6 +94,33 @@ $ crictl start bf85f83f2610c
 
 # run shell inside container
 $ crictl exec -it bf85f83f2610c /bin/sh
+```
+
+## Podman on Orange Pi PC Plus
+
+Run basic interactive example:
+
+```bash
+$ podman pull docker.io/library/alpine
+$ podman run -it -v /opt/Arrival:/opt docker.io/library/alpine
+```
+
+Run basic detached example:
+```bash
+$ podman pull docker.io/library/httpd
+$ podman run -dt -p 8080:80/tcp docker.io/library/httpd
+$ curl localhost:8080
+<html><body><h1>It works!</h1></body></html>
+```
+
+Run Kubernetes pods with Podman play kube using attached [test.yaml](https://github.com/geomatsi/br2-external-collection/files/8566115/test.yaml.txt):
+```
+$ podman play kube test.yaml 
+```
+
+Stop and remove pod and its containers:
+```bash
+$ podman pod rm mypod -f
 ```
 
 ## Running firmware on Cortex-M4 cores
