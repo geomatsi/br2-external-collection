@@ -1,0 +1,5 @@
+[Match]
+Path=platform-1c30000.ethernet
+
+[Network]
+DHCP=ipv4

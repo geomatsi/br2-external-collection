@@ -1,0 +1,36 @@
+diff --git a/arch/arm/boot/dts/allwinner/sun8i-h2-plus-orangepi-zero.dts b/arch/arm/boot/dts/allwinner/sun8i-h2-plus-orangepi-zero.dts
+index 3706216ffb40..ffc0f1677f8f 100644
+--- a/arch/arm/boot/dts/allwinner/sun8i-h2-plus-orangepi-zero.dts
++++ b/arch/arm/boot/dts/allwinner/sun8i-h2-plus-orangepi-zero.dts
+@@ -110,6 +110,16 @@ wifi_pwrseq: wifi_pwrseq {
+ 		reset-gpios = <&r_pio 0 7 GPIO_ACTIVE_LOW>;
+ 		post-power-on-delay-ms = <200>;
+ 	};
++
++	onewire1 {
++		compatible = "w1-gpio";
++		gpios = <&pio 6 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* PG6 */
++	};
++
++	onewire2 {
++		compatible = "w1-gpio";
++		gpios = <&pio 6 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* PG7 */
++	};
+ };
+ 
+ &cpu0 {
+@@ -207,3 +217,14 @@ &usbphy {
+ 	status = "okay";
+ 	usb0_id_det-gpios = <&pio 6 12 GPIO_ACTIVE_HIGH>; /* PG12 */
+ };
++
++&i2c0 {
++	status = "okay";
++
++	rtc@68 {
++		compatible = "dallas,ds3231";
++		reg = <0x68>;
++	};
++};
++
++

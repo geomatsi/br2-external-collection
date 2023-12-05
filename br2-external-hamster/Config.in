@@ -1,0 +1,1 @@
+source "$BR2_EXTERNAL_HAMSTER_PATH/package/temp-bot/Config.in"
