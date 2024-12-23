@@ -1,0 +1,12 @@
+diff --git a/drivers/soc/sunxi/sunxi_mbus.c b/drivers/soc/sunxi/sunxi_mbus.c
+index 1734da357ca2..d7dd9b3b9f79 100644
+--- a/drivers/soc/sunxi/sunxi_mbus.c
++++ b/drivers/soc/sunxi/sunxi_mbus.c
+@@ -47,7 +47,6 @@ static const char * const sunxi_mbus_devices[] = {
+ 	"allwinner,sun8i-a33-display-frontend",
+ 	"allwinner,sun8i-a33-video-engine",
+ 	"allwinner,sun8i-a83t-csi",
+-	"allwinner,sun8i-h3-csi",
+ 	"allwinner,sun8i-h3-video-engine",
+ 	"allwinner,sun8i-v3s-csi",
+ 	"allwinner,sun9i-a80-display-backend",
