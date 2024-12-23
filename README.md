@@ -15,7 +15,8 @@ Collection of Buildroot BR2_EXTERNAL examples:
 ---
 **NOTE**
 
-All the examples have been tested on top of the following Buildroot baseline:
+Unless noted in layer specific README, all the examples have
+been tested on top of the following Buildroot baseline:
 * branch: 2022.x
 * commit: 96b346cb56ccf5ef52b29d367db5149d212c45df
 ---
