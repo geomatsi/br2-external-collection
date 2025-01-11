@@ -1,0 +1,142 @@
+diff --git a/arch/arm/boot/dts/allwinner/sun8i-h3-orangepi-one-camera-ov5640.dts b/arch/arm/boot/dts/allwinner/sun8i-h3-orangepi-one-camera-ov5640.dts
+new file mode 100644
+index 000000000000..6610f0dc47a0
+--- /dev/null
++++ b/arch/arm/boot/dts/allwinner/sun8i-h3-orangepi-one-camera-ov5640.dts
+@@ -0,0 +1,136 @@
++/*
++ * Copyright (C) 2016 Hans de Goede <hdegoede@redhat.com>
++ *
++ * This file is dual-licensed: you can use it either under the terms
++ * of the GPL or the X11 license, at your option. Note that this dual
++ * licensing only applies to this file, and not this project as a
++ * whole.
++ *
++ *  a) This file is free software; you can redistribute it and/or
++ *     modify it under the terms of the GNU General Public License as
++ *     published by the Free Software Foundation; either version 2 of the
++ *     License, or (at your option) any later version.
++ *
++ *     This file is distributed in the hope that it will be useful,
++ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *     GNU General Public License for more details.
++ *
++ * Or, alternatively,
++ *
++ *  b) Permission is hereby granted, free of charge, to any person
++ *     obtaining a copy of this software and associated documentation
++ *     files (the "Software"), to deal in the Software without
++ *     restriction, including without limitation the rights to use,
++ *     copy, modify, merge, publish, distribute, sublicense, and/or
++ *     sell copies of the Software, and to permit persons to whom the
++ *     Software is furnished to do so, subject to the following
++ *     conditions:
++ *
++ *     The above copyright notice and this permission notice shall be
++ *     included in all copies or substantial portions of the Software.
++ *
++ *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++ *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
++ *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++ *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
++ *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
++ *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
++ *     OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++#include "sun8i-h3-orangepi-one.dts"
++
++/ {
++	model = "Xunlong Orange Pi One with camera sensor ov5460";
++	compatible = "xunlong,orangepi-one", "allwinner,sun8i-h3";
++
++	cam_dovdd_reg_1v8: camera-dovdd {
++		compatible = "regulator-fixed";
++		regulator-name = "camera_dovdd";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		gpio = <&pio 0 17 GPIO_ACTIVE_HIGH>;	/* CSI-PWR-EN (PA17) */
++		startup-delay-us = <100000>;
++		enable-active-high;
++	};
++
++	cam_avdd_reg_2v8: camera-avdd {
++		compatible = "regulator-fixed";
++		regulator-name = "camera_avdd";
++		regulator-min-microvolt = <2800000>;
++		regulator-max-microvolt = <2800000>;
++		gpio = <&pio 6 13 GPIO_ACTIVE_HIGH>;	/* AFCC_EN (PG13) */
++		startup-delay-us = <100000>;
++		enable-active-high;
++	};
++
++	cam_dvdd_reg_1v5: camera-dvdd {
++		compatible = "regulator-fixed";
++		regulator-name = "camera_dvdd";
++		regulator-min-microvolt = <1500000>;
++		regulator-max-microvolt = <1500000>;
++		gpio = <&pio 6 11 GPIO_ACTIVE_HIGH>;	/* CSI_EN (PG11) */
++		startup-delay-us = <100000>;
++		enable-active-high;
++	};
++};
++
++&csi {
++	status = "okay";
++
++	port {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		csi_ep: endpoint {
++			remote-endpoint = <&ov5640_ep>;
++			bus-width = <8>;
++			data-shift = <2>;
++			hsync-active = <1>; /* Active high */
++			vsync-active = <0>; /* Active low */
++			data-active = <1>;  /* Active high */
++			pclk-sample = <1>;  /* Rising */
++		};
++	};
++};
++
++&i2c2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&i2c2_pins>;
++	status = "okay";
++
++	ov5640: camera@3c {
++		compatible = "ovti,ov5640";
++		reg = <0x3c>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&csi_mclk_pin>;
++		clocks = <&ccu CLK_CSI_MCLK>;
++		clock-names = "xclk";
++
++		DOVDD-supply = <&cam_dovdd_reg_1v8>;
++		DVDD-supply = <&cam_dvdd_reg_1v5>;
++		AVDD-supply = <&cam_avdd_reg_2v8>;
++
++		reset-gpios = <&pio 4 14 GPIO_ACTIVE_LOW>; /* CSI-RESET# (PE14) */
++		powerdown-gpios = <&pio 4 15 GPIO_ACTIVE_HIGH>; /* CSI-STBY-EN (PE15) */
++
++		port {
++			ov5640_ep: endpoint {
++				remote-endpoint = <&csi_ep>;
++				bus-width = <8>;
++				data-shift = <2>;
++				hsync-active = <1>; /* Active high */
++				vsync-active = <0>; /* Active low */
++				data-active = <1>;  /* Active high */
++				pclk-sample = <1>;  /* Rising */
++			};
++		};
++	};
++};
++
++&i2c2_pins {
++	drive-strength = <40>;
++	bias-pull-up;
++};

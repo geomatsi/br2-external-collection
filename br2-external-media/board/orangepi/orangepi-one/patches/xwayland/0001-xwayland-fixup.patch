@@ -1,0 +1,18 @@
+diff --git a/hw/xwayland/xwayland-glamor.c b/hw/xwayland/xwayland-glamor.c
+index c6aa8eb..77e4fb1 100644
+--- a/hw/xwayland/xwayland-glamor.c
++++ b/hw/xwayland/xwayland-glamor.c
+@@ -288,11 +288,11 @@ xwl_glamor_get_formats(ScreenPtr screen,
+         drmDevice *main_dev = xwl_screen_get_main_dev(xwl_screen);
+ 
+         return xwl_get_formats_for_device(&xwl_screen->default_feedback, main_dev,
+-                                          num_formats, formats);
++                                          (uint32_t *)num_formats, (uint32_t **)formats);
+     }
+ 
+     return xwl_get_formats(xwl_screen->formats, xwl_screen->num_formats,
+-                           num_formats, formats);
++                           (uint32_t *)num_formats, (uint32_t **)formats);
+ }
+ 
+ static Bool

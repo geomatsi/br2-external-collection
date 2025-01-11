@@ -18,6 +18,12 @@ $ make
 
 ```bash
 $ make clean
+$ make BR2_EXTERNAL=/path/to/br2-external-media orangepi_one_defconfig
+$ make
+```
+
+```bash
+$ make clean
 $ make BR2_EXTERNAL=/path/to/br2-external-media orangepi_zero_plus2_defconfig
 $ make
 ```

@@ -1,0 +1,17 @@
+diff --git a/arch/arm/boot/dts/allwinner/sunxi-h3-h5.dtsi b/arch/arm/boot/dts/allwinner/sunxi-h3-h5.dtsi
+index 7df60515a903..81ecf40bfabc 100644
+--- a/arch/arm/boot/dts/allwinner/sunxi-h3-h5.dtsi
++++ b/arch/arm/boot/dts/allwinner/sunxi-h3-h5.dtsi
+@@ -418,6 +418,12 @@ csi_pins: csi-pins {
+ 				function = "csi";
+ 			};
+ 
++			/omit-if-no-ref/
++			csi_mclk_pin: csi-mclk-pin {
++				pins = "PE1";
++				function = "csi";
++			};
++
+ 			emac_rgmii_pins: emac-rgmii-pins {
+ 				pins = "PD0", "PD1", "PD2", "PD3", "PD4",
+ 				       "PD5", "PD7", "PD8", "PD9", "PD10",
